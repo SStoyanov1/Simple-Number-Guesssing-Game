@@ -53,7 +53,7 @@
             rams = checkForRams(generatedNumber, value);
             sheep = checkForSheep(generatedNumber, value);
 
-            $('#sheep-rams-message').html('Rams :' + rams + '<br>' + 'Sheep: ' + (sheep - rams));
+            $('#sheep-rams-message').html('Rams: ' + rams + '<br>' + 'Sheep: ' + (sheep - rams));
 
             if (rams === 4) {
                 $('#system-message').html('Congratulations! You did it with only ' + ((count == 1) ? count + ' shot' : count + ' shots') + '! <br> Please enter your nickname!');
@@ -100,8 +100,6 @@
 
     }
 
-
-
     function checkForRams(generatedNumber, value) {
         var firstValue = generatedNumber.toString(),
             secondValue = value.toString(),
@@ -114,7 +112,7 @@
             }
         }
 
-        return rams
+        return rams;
     }
 
     function checkForSheep(generatedNumber, value) {
@@ -127,6 +125,7 @@
         for (i = 0; i < 4; i++) {
             for (j = 0; j < 4; j++) {
                 if (firstValue[i] == secondValue[j]) {
+                    secondValue = secondValue.replaceAt(j, 'x');
                     sheep++;
                     break;
                 }
@@ -135,4 +134,8 @@
 
         return sheep;
     };
+
+    String.prototype.replaceAt = function (index, character) {
+        return this.substr(0, index) + character + this.substr(index + character.length);
+    }
 });
